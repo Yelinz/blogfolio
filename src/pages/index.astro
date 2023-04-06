@@ -1,0 +1,21 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "Blogfolio"
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description="A collection of my thoughts and ideas." />
+	</head>
+	<body>
+		<Header title={title} />
+		<main>
+			<h1>Welcome</h1>
+		</main>
+		<Footer />
+	</body>
+</html>

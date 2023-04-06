@@ -1,0 +1,21 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "Lost in space"
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description="You have been come lost in space." />
+	</head>
+	<body>
+		<Header title={title} />
+		<main>
+			<h1>You have been come lost in space.</h1>
+		</main>
+		<Footer />
+	</body>
+</html>
