@@ -24,10 +24,10 @@ const {
 	noindex = false,
 } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const pageURL = new URL(Astro.url.pathname, Astro.site);
 const imageURL = new URL(image, Astro.site);
 const fullTitle = title === SITE_TITLE ? title : `${title} | ${SITE_TITLE}`;
-const robots = noindex ? 'noindex, nofollow' : 'index, follow';
+const publishedDate = pubDate?.toISOString();
+const modifiedDate = (updatedDate ?? pubDate)?.toISOString();
 const schema =
 	type === 'article'
 		? {
@@ -36,8 +36,8 @@ const schema =
 				headline: title,
 				description,
 				image: [imageURL.toString()],
-				datePublished: pubDate?.toISOString(),
-				dateModified: (updatedDate ?? pubDate)?.toISOString(),
+				...(publishedDate ? { datePublished: publishedDate } : {}),
+				...(modifiedDate ? { dateModified: modifiedDate } : {}),
 				author: {
 					'@type': 'Person',
 					name: SITE_AUTHOR,
@@ -58,7 +58,7 @@ const schema =
 				'@type': 'WebPage',
 				name: fullTitle,
 				description,
-				url: pageURL.toString(),
+				url: canonicalURL.toString(),
 				inLanguage: 'en',
 				isPartOf: {
 					'@type': 'WebSite',
@@ -74,7 +74,7 @@ const schema =
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.png" />
 <meta name="generator" content={Astro.generator} />
-<meta name="robots" content={robots} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
 <meta name="author" content={SITE_AUTHOR} />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="alternate" type="application/rss+xml" title={`${SITE_TITLE} RSS`} href="/rss.xml" />
