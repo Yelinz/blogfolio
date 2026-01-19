@@ -3,3 +3,4 @@
 
 export const SITE_TITLE = "Yelin's Blogfolio";
 export const SITE_DESCRIPTION = 'A collection of my thoughts and ideas.';
+export const SITE_AUTHOR = 'Yelin Zhang';
